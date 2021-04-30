@@ -21,10 +21,10 @@ module.exports = {
 
   getAll: async (request, response) => {
     const foods = await Food.find({});
-                                  //  .skip(5)                
-                                  //  .limit(10)                
-                                  //  .sort({calorias: 1}      
-                                  //  .select({nombre: true}
+    //  .skip(5)                
+    //  .limit(10)                
+    //  .sort({calorias: 1}      
+    //  .select({nombre: true}
     try {
       response.send(foods);
     } catch (error) {
@@ -34,9 +34,9 @@ module.exports = {
 
   getID: async (request, response) => {
     const food = await Food.findById(request.params.id);
-                        // .find({
-                        //  nombre: 'asado'
-                        // })
+    // .find({
+    //  nombre: 'asado'
+    // })
 
     try {
       response.send(food);
