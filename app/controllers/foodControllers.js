@@ -21,7 +21,10 @@ module.exports = {
 
   getAll: async (request, response) => {
     const foods = await Food.find({});
-
+                                  //  .skip(100)                
+                                  //  .limit(10)                
+                                  //  .sort({calorias: 1}      
+                                  //  .select({nombre: true}
     try {
       response.send(foods);
     } catch (error) {
