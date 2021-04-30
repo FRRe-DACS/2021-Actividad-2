@@ -41,7 +41,7 @@ module.exports = {
 
   modifyID: async (request, response) => {
     try {
-      const food = await Food.findByIdAndUpdate(request.params.id, request.body);
+      const food = await Food.findByIdAndUpdate(request.params.id, request.body, { new: true });
       await food.save();
       response.send(food);
     } catch (error) {
