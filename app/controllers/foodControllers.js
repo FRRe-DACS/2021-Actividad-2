@@ -34,6 +34,9 @@ module.exports = {
 
   getID: async (request, response) => {
     const food = await Food.findById(request.params.id);
+                        // .find({
+                        //  nombre: 'asado'
+                        // })
 
     try {
       response.send(food);
