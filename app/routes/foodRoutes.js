@@ -1,69 +1,25 @@
 const express = require("express");
-const Food = require("../models/foodModel");
 const app = express();
 
-app.get("/foods", async (request, response) => {
-  const foods = await Food.find({});
+const {
+  create,
+  getAll,
+  getID,
+  modifyID,
+  deleteID,
+  deleteAll
+} = require("../controllers/foodControllers");
 
-  try {
-    response.send(foods);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
+app.get("/foods", getAll);
 
-app.get("/food/:id", async (request, response) => {
+app.get("/food/:id", getID);
 
-  const food = await Food.findById(request.params.id);
+app.post("/food", create);
 
-  try {
-    response.send(food);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
+app.patch("/food/:id", modifyID);
 
-app.post("/food", async (request, response) => {
-  const food = new Food(request.body);
+app.delete("/food/:id", deleteID);
 
-  try {
-    await food.save();
-    response.send(food);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
-
-app.patch("/food/:id", async (request, response) => {
-  try {
-    const food = await Food.findByIdAndUpdate(request.params.id, request.body);
-    await food.save();
-    response.send(food);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
-
-app.delete("/food/:id", async (request, response) => {
-  try {
-    const food = await Food.findByIdAndDelete(request.params.id);
-
-    if (!food) response.status(404).send("La comida buscada no existe");
-    response.status(200).send();
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
-
-app.delete("/food", async (request, response) => {
-  try {
-    const food = await Food.deleteMany({});
-
-    if (!food) response.status(404).send("No hay nada de comidas por acá");
-    response.status(200).send(`Se han borrado ${food.deletedCount} comidas`);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
+app.delete("/food", deleteAll);
 
 module.exports = app;

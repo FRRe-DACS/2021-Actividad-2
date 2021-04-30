@@ -10,6 +10,7 @@ module.exports = {
       response.status(500).send(error);
     }
   },
+
   getIngredient: async (request, response) => {
     const ingredient = await Ingredient.findById(request.params.id);
 
@@ -19,6 +20,7 @@ module.exports = {
       response.status(500).send(error);
     }
   },
+
   addIngredient: async (request, response) => {
     const ingredient = new Ingredient(request.body);
 
@@ -29,6 +31,7 @@ module.exports = {
       response.status(500).send(error);
     }
   },
+
   editIngredient: async (request, response) => {
     try {
       const ingredient = await Ingredient.findByIdAndUpdate(
@@ -41,6 +44,7 @@ module.exports = {
       response.status(500).send(error);
     }
   },
+
   deleteIngredient: async (request, response) => {
     try {
       const ingredient = await Ingredient.findByIdAndDelete(request.params.id);
@@ -51,6 +55,7 @@ module.exports = {
       response.status(500).send(error);
     }
   },
+
   deleteAllIngredients: async (request, response) => {
     try {
       const ingredients = await Ingredient.deleteMany({});
@@ -64,4 +69,5 @@ module.exports = {
       response.status(500).send(error);
     }
   },
+
 };
